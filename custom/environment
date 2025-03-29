@@ -1,0 +1,126 @@
+# ~~~~~~~~~~~~~~~ Homebrew ~~~~~~~~~~~~~~~~~~~~~~~~
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	# needed for brew
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
+	[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+	complete -C /opt/homebrew/bin/terraform terraform
+	export PATH="$HOME/.config/emacs/bin:$PATH"
+	export PATH="$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/bin:/opt/homebrew/lib/python3.11/site-packages/aider:$HOME/Scripts"
+fi
+
+# ~~~~~~~~~~~~~~~ Terminal~~~~~~~~~~~~~~~~~~~~~~~~
+if [[ -n "$TMUX" ]]; then
+	# Check if inside WezTerm
+	if [[ "$TERM_PROGRAM" == "WezTerm" ]] && [[ -n "$WEZTERM_CONFIG_DIR" ]]; then
+		export TERM="xterm-256color"
+	else
+		export TERM="tmux-256color"
+	fi
+elif [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
+	export TERM="wezterm"
+else
+	export TERM="xterm-256color"
+fi
+
+# ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DOWNLOADS="$HOME/downloads"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CURRENT_DESKTOP=i3
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	export PATH=$PATH:$HOME/Applications
+fi
+
+# Initialize pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+export PATH="$HOME/.spin/bin:$PATH"
+
+# config
+export BROWSER="vivaldi"
+export EDITOR=nvim
+export BAT_THEME="gruvbox-dark"
+
+# directories
+export REPOS="$HOME/dev/repos"
+export DEVHOME="$HOME/dev"
+export GITUSER="dpietersz"
+export GHREPOS="$REPOS/github.com"
+export GLREPOS="$REPOS/gitlab.com"
+export PROJECTS="$DEVHOME/projects"
+export DOTFILES="$DEVHOME/environment/home"
+export DPM="$PROJECTS/dividendportfoliomanager.com/"
+export SCRIPTS="$DEVHOME/environment/scripts"
+export SECOND_BRAIN="$DEVHOME/second_brain"
+export CONFIG="$HOME/.config"
+
+# Go related. In general all executables and scripts go in .local/bin
+export GOPATH="$HOME/dev/gopath"
+export GOBIN="$HOME/bin"
+export GOPRIVATE="github.com/$GITUSER/*,gitlab.com/$GITUSER/*"
+export PATH="$PATH:$GOBIN"
+export PATH="$PATH:/opt/homebrew/bin"
+
+export PATH="$PATH:/opt/homebrew/bin/go $GOPATH/bin:$HOME/.cargo/bin"
+export PATH="$PATH:/Users/pietersz/.local/bin"
+
+PATH="${PATH:+${PATH}:}"$SCRIPTS":"$HOME"/.local/bin" # appending
+
+# Check if passwordstore is installed
+if command -v pass &>/dev/null; then
+	export ANTHROPIC_API_KEY=$(pass show Sites/anthropic.com/PAT/aider2)
+	export OPENAI_KEY=$(pass show Sites/openai.com/api-keys/neovim)
+	export GEMINI_API_KEY=$(pass show Sites/google.com/PAT/dividendportfoliomanager.com)
+	export GOOGLE_AI_API_KEY=$(pass show Sites/google.com/PAT/dividendportfoliomanager.com)
+	export DATABRICKS_HOST="https://adb-5244239616138753.13.azuredatabricks.net"
+	export DATABRICKS_SECRET=$(pass show Logins/gemeente-hilversum/databricks/service-principal | grep -m 1 '^')
+	export DATABRICKS_CLIENT_ID=$(pass show Logins/gemeente-hilversum/databricks/service-principal | grep "client-id:" | cut -d ' ' -f 2)
+	export OPENROUTER_API_KEY=$(pass show Sites/openrouter.ai/api-keys/aider)
+	export DEEPSEEK_API_KEY=$(pass show Sites/deepseek.com/api-key/aider)
+else
+	echo "Please install passwordstore to securely store and retrieve the Anthropic API key."
+fi
+
+# ~~~~~~~~~~~~~~~ Prompt ~~~~~~~~~~~~~~~~~~~~~~~~
+
+eval "$(starship init bash)"
+
+# ----------------------------- dircolors ----------------------------
+
+if _have dircolors; then
+	if [[ -r "$HOME/.dircolors" ]]; then
+		eval "$(dircolors -b "$HOME/.dircolors")"
+	else
+		eval "$(dircolors -b)"
+	fi
+fi
+
+# ~~~~~~~~~~~~~~~ Laravel Herd ~~~~~~~~~~~~~~~~~~~~~~~~
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	export PATH="/Users/pietersz/.config/herd-lite/bin:$PATH"
+	export PHP_INI_SCAN_DIR="/Users/pietersz/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+	# Herd injected PHP 8.4 configuration.
+	export HERD_PHP_84_INI_SCAN_DIR="/Users/pietersz/Library/Application Support/Herd/config/php/84/"
+	# Herd injected PHP binary.
+	export PATH="/Users/pietersz/Library/Application Support/Herd/bin/":$PATH
+	export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+	export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+	# Herd injected PHP binary.
+	export PATH="/Users/pietersz/Library/Application Support/Herd/bin/":$PATH
+fi
+
+# ~~~~~~~~~~~~~~~ NVM  ~~~~~~~~~~~~~~~~~~~~~~~~
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+

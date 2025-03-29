@@ -1,0 +1,109 @@
+# ~~~~~~~~~~~~~~~ Local Utility Functions ~~~~~~~~~~~~~~~~~~~~~~~~
+
+_have() { type "$1" &>/dev/null; }
+_source_if() { [[ -r "$1" ]] && source "$1"; }
+
+alias v=nvim
+alias vim=nvim
+alias or='vim "$SECOND_BRAIN"/+\ Encounters/*.md'
+alias k='kubectl'
+alias kns='kubens'
+
+alias ppp='pass show -c Sites/canva.com'
+alias update_mac='brew update; brew upgrade; brew upgrade --cask --greedy ; brew cleanup; npm install npm -g; npm update -g;'
+alias brewdump='brew bundle dump --force --file=~$DOTFILES/homebrew/Brewfile'
+
+# cd
+alias dp='cd $REPOS/github.com/dpietersz/'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd~"
+alias cl="clear"
+alias scripts='cd $SCRIPTS'
+alias dot='cd $GLREPOS/pietersz-personal-tools/dotfiles'
+alias repos='cd $REPOS'
+alias glrepos='cd $GLREPOS'
+alias ghrepos='cd $GHREPOS'
+alias cdgo='cd $GHREPOS/go/'
+alias rwdot='cd $REPOS/github.com/rwxrob/dot'
+alias mvdot='cd $REPOS/github.com/mischavandenburg/dotfiles'
+alias tpdot='cd $REPOS/github.com/ThePrimeagen/.dotfiles/'
+alias ttdot='cd $REPOS/github.com/techno-tim'
+alias robdot='cd $REPOS/github.com/rwxrob'
+
+# ls
+alias ls='ls --color=auto'
+alias la='eza -laghm --all --icons --git --color=always --group-directories-first'
+alias ll="eza -l --color=always --group-directories-first --icons"                                 # long format
+alias lt="eza -aT --color=always --group-directories-first --icons -I '.git|.vscode|node_modules'" # tree listing
+alias l="eza -lah --color=always --group-directories-first --icons"                                # tree listing
+
+# finds all files recursively and sorts by last modification, ignore hidden files
+alias last='find . -type f -not -path "*/\.*" -exec ls -lrt {} +'
+
+alias t='tmux'
+alias e='exit'
+alias syu='sudo pacman -Syu'
+
+# git
+alias gp='git pull'
+alias gs='git status'
+alias lg='lazygit'
+
+# Azure
+alias sub='az account set -s'
+
+# passwordstore
+alias p='pass'
+alias pp='pass git push'
+alias pi='pass insert'
+alias pmv='pass mv'
+alias pcp='pass cp'
+alias pedit='pass edit'
+alias psearch='pass search'
+alias psh='pass show'
+alias psc='pass show -c'
+alias pbiadmin='pass show -c Sites/microsoftonline.com/hilversum/pbiadmin'
+
+# vim & second brain
+alias sb="cd '$SECOND_BRAIN' ; vim Home.md"
+alias in="cd \$SECOND_BRAIN/0-inbox/"
+
+# edit config files
+alias bashconf='v ~/.bashrc'
+alias tmuxconf='v ~/.tmux.conf'
+alias vimconf='cd ~/.config/nvim && v init.lua'
+
+# ricing
+alias sbr='source ~/.bashrc'
+
+# tmux aliases
+alias devxl="tmux new-session -d -s developmentXL -n Editor;\n
+tmux split-window -v;
+tmux select-pane -t 1;
+tmux split-window -h;
+tmux split-window -v;
+tmux resize-pane -t 4 -D 20;
+tmux resize-pane -t 2 -U 20;
+tmux select-pane -t 1
+tmux send-keys 'nvim' C-m;
+tmux new-window -t developmentXL -n Tools;
+tmux split-window -v;
+tmux select-pane -t 1;
+tmux split-window -h;
+tmux resize-pane -t 3 -D 15;
+tmux select-pane -t 1;
+tmux send-keys 'lazygit' C-m;
+tmux select-pane -t 2;
+tmux send-keys 'lazydocker' C-m;
+tmux select-pane -t 3;
+tmux send-keys 'btop' C-m;
+tmux select-pane -t 1;
+tmux select-window -t Editor;
+tmux select-pane -t 1;
+tmux new-window -t developmentXL -n SecondBrain;
+tmux send-keys 'sb' C-m;
+tmux select-wind -t Editor;
+tmux attach-session -t developmentXL;"

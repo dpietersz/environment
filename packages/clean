@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+# Find orphaned packages
+orphans=$(sudo pacman -Qtdq)
+
+if [ -z "$orphans" ]; then
+    echo "No orphaned packages found."
+    exit 0
+fi
+
+# Display the orphaned packages
+echo "The following orphaned packages will be removed:"
+echo "$orphans"
+echo
+
+# Ask for confirmation
+read -p "Do you want to proceed with removal? (y/N): " confirm
+
+if [[ "$confirm" =~ ^[Yy]$ ]]; then
+    echo "Removing orphaned packages..."
+    echo "$orphans" | sudo pacman -Rns -
+    echo "Orphaned packages have been removed."
+else
+    echo "Operation cancelled. No packages were removed."
+fi

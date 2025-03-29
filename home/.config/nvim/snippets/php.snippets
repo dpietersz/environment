@@ -1,0 +1,56 @@
+snippet pubf "public method"
+	public function ${1}(${2}): $3
+	{
+		${0}
+	}
+
+snippet prof "protected method"
+	protected function ${1}(${2}): $3
+	{
+		${0}
+	}
+
+snippet prif "private method"
+	private function ${1}(${2}): $3
+	{
+		${0}
+	}
+
+snippet testt "test method (prefix)"
+	public function test_${1}()
+	{
+		${0}
+	}
+
+snippet testa "test method (annotation)"
+	/** @test */
+	public function ${1}()
+	{
+		${0}
+	}
+
+snippet strict "Add strict types declaration"
+	declare(strict_types=1);
+
+snippet inv "Create PHP __invoke method"
+	public function __invoke(${1}): ${2:void}
+	{
+		${3}
+	}
+
+snippet pubsf "Create a public static method"
+	public static function ${1}(${2}): ${3:void}
+	{
+		${0}
+	}
+
+snippet it "Create a Pest test"
+	it('${1}', function () {
+	    // Arrange
+	    ${0}
+
+	    // Act
+
+	    // Assert
+	});
+
