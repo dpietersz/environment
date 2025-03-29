@@ -1,0 +1,13 @@
+#!/bin/bash
+
+BASE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+
+main() {
+  mkdir -p "$BASE_DIR/repos/github.com"
+  mkdir -p "$BASE_DIR/repos/gitlab.com"
+  mkdir -p "$BASE_DIR/repos/dev.azure.com"
+  mkdir -p "$BASE_DIR/projects"
+  mkdir -p "$BASE_DIR/second_brain"
+}
+
+main
