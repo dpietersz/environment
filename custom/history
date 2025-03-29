@@ -1,6 +1,0 @@
-HISTFILE=~/.histfile
-HISTSIZE=999999999
-SAVEHIST=$HISTSIZE
-HISTONCONTROL=ignorespace
-setopt APPEND_HISTORY
-unsetopt share_history
