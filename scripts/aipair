@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+_have() { type "$1" &>/dev/null; }
+
+# Check if we're in a git repository
+if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+    echo "Error: This script must be run from within a Git repository."
+    exit 1
+fi
+
+if ! _have aider; then
+    echo "Error: This script requires aider to be installed."
+    exit 1
+fi
+
+if ! _have pass; then
+    echo "Error: This script requires pass (password-store) to be installed."
+    exit 1
+fi
+
+API_KEY=$(pass show Sites/anthropic.com/PAT/neovim)
+
+if [ -z "$API_KEY" ]; then
+    echo "Error: Failed to retrieve the API key from pass."
+    exit 1
+fi
+
+# Run aider with the API key and any additional arguments passed to the script
+# aider --anthropic-api-key "$API_KEY" --sonnet "$@"
+aider --4o --browser "$@"

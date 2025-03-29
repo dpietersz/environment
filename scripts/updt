@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# source: https://forum.endeavouros.com/t/a-complete-idiots-guide-to-endeavour-os-maintenance-update-upgrade/25184/9
+
+sudo eos-rankmirrors --verbose &&
+	sudo reflector --protocol https --verbose --latest 25 --sort rate --save /etc/pacman.d/mirrorlist &&
+	yay -Syyu &&
+	sudo journalctl --vacuum-time=4weeks &&
+	sudo paccache -r &&
+	paccache -ruk0
