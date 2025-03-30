@@ -10,12 +10,12 @@ export HISTCONTROL=ignorespace
 
 export GITUSER="dpietersz"
 export DEV="$HOME/dev"
+export DOTFILES="$DEV/environment"
+export PROJECTS="$DEV/projects"
 export REPOS="$DEV/repos"
+export SECOND_BRAIN="$DEV/second_brainn"
 export GHREPOS="$REPOS/github.com"
 export GLREPOS="$REPOS/gitlab.com"
-export PROJECTS="$DEV/projects"
-export DOTFILES="$DEV/home"
 export SCRIPTS="$DOTFILES/scripts"
-export SECOND_BRAIN="$DEV/second_brainn"
 export CONFIG="$HOME/.config"
 
