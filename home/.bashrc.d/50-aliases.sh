@@ -25,12 +25,7 @@ alias ~="cd ~"
 alias cl="clear"
 alias c="clear"
 alias scripts='cd "$SCRIPTS"'
-alias dp='cd "$GHREPOS/dpietersz/"'
-alias lab='cd "$LAB"'
-alias sstlab='cd "$LAB/sst.dev"'
-alias alab='cd "$GHREPOS/azure-lab"'
-alias pdf='cd "$PDFDROP"'
-alias dpm='cd "$DPM"'
+alias projects='cd "$PROJECTS"'
 alias dot='cd "$DOTFILES"'
 alias repos='cd "$REPOS"'
 alias glrepos='cd "$GLREPOS"'
@@ -40,15 +35,13 @@ alias rwdot='cd "$REPOS/github.com/rwxrob/dot"'
 alias mvdot='cd "$REPOS/github.com/mischavandenburg/dotfiles"'
 alias tpdot='cd "$REPOS/github.com/ThePrimeagen/.dotfiles/"'
 alias ttdot='cd "$REPOS/github.com/techno-tim"'
-alias rob='cd "$REPOS/github.com/rwxrob"'
 
 # ------------------ Shell / Config ------------------
 
 alias bashconf='v ~/.bashrc'
 alias tmuxconf='v ~/.tmux.conf'
-alias vimconf='cd ~/.config/nvim && v init.lua'
-alias sbr='source ~/.bashrc'
-alias s='startx'
+alias vimconf='cd ~/.config/nvim && nvim init.lua'
+alias sbr='source ~/.bash_profile'
 
 # ------------------ Shell Utilities ------------------
 
